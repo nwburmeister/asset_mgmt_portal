@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
 
@@ -11,7 +12,10 @@ def dashboard():
     ROUTE FOR DASHBOARD
     :return:
     """
-    return "Hello world"
+    return render_template("template.html")
+
+
+
 
 
 # def create_app(test_config=None):
