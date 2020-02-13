@@ -1,8 +1,16 @@
 import os
 from flask import Flask
 from flask import render_template
+from .forms import AcquisitionForm
+import pandas as pd
+from wtforms import FloatField
+from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
+
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 @app.route('/')
@@ -15,7 +23,23 @@ def dashboard():
     return render_template("template.html")
 
 
+@app.route('/acquisitions_model')
+def acquisitions_model():
+    """
+    ROUTE FOR MODELING A DEAL
+    :return:
+    """
 
+    df = pd.read_excel('app/model_fields.xlsx')
+    fields = df.values.tolist()
+    for field in fields:
+        var = field[0]
+        name = var.replace(" ", "_")
+        setattr(AcquisitionForm, name, FloatField(name, validators=[DataRequired()]))
+
+    acq_form = AcquisitionForm()
+
+    return render_template('acquisitions_model.html', form=acq_form)
 
 
 # def create_app(test_config=None):

@@ -1,0 +1,15 @@
+{% extends "template.html" %}
+
+{% block content %}
+<h1 class="mt-4">Acquisitions Model</h1>
+
+    <div class="card mb-4">
+        {{ form.hidden_tag() }}
+        {% for field in form %}
+            <tr>
+                <td><b>{{ field.label }}</b> {{ field }} </td>
+            </tr>
+        {% endfor %}
+    </div>
+
+{% endblock %}
