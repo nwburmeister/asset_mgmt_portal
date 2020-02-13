@@ -9,3 +9,4 @@ class AcquisitionForm(FlaskForm):
     """
     FORM FOR THE ACQUISITIONS MODEL
     """
+    submit = SubmitField('Submit')
