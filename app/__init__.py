@@ -67,6 +67,15 @@ def acquisitions_model():
     return render_template('acquisitions_model.html', form=acq_form)
 
 
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
+
+@app.route("/register")
+def register():
+    return render_template('register.html')
+
 # def create_app(test_config=None):
 #     # create and configure the app
 #     app = Flask(__name__, instance_relative_config=True)
