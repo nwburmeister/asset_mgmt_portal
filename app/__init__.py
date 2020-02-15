@@ -67,6 +67,11 @@ def acquisitions_model():
     return render_template('acquisitions_model.html', form=acq_form)
 
 
+@app.route('/property_list')
+def property_list():
+    return render_template('propert_list.html')
+
+
 @app.route("/login")
 def login():
     return render_template('login.html')
