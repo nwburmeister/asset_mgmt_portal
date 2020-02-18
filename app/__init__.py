@@ -1,7 +1,8 @@
 import os
 from flask import Flask
 from flask import render_template
-from .forms import AcquisitionForm
+from .forms import AcquisitionForm, YardiForm
+from app.scripts.yardi import yardi_login, T12_Month_Statement
 import pandas as pd
 from wtforms import FloatField
 from wtforms.validators import DataRequired
@@ -70,6 +71,23 @@ def acquisitions_model():
 @app.route('/property_list')
 def property_list():
     return render_template('propert_list.html')
+
+
+@app.route('/yardi', methods=['GET', 'POST'])
+def yardi():
+
+    form = YardiForm()
+    df = pd.DataFrame()
+    if form.validate_on_submit():
+        property_code = form.property_code.data
+        book_code = form.book_code.data
+        account_tree = form.account_tree.data
+        period_start = form.period_start.data
+        period_end = form.period_end.data
+        if yardi_login():
+            df = T12_Month_Statement(property_code, book_code, account_tree, period_start, period_end)
+            return render_template("yardi.html", form=form, prop_data=df)
+    return render_template('yardi.html', form=form, prop_data=df)
 
 
 @app.route("/login")
