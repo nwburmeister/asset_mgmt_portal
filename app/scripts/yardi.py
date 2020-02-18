@@ -72,4 +72,19 @@ def T12_Month_Statement(property, book, account_tree, period_start, period_end):
             data.append(line_data)
 
     df = pd.DataFrame(data=data)
+    df.columns = ["Item",
+                  "Jan 2019",
+                  "Feb 2019",
+                  "Mar 2019",
+                  "Apr 2019",
+                  "May 2019",
+                  "Jun 2019",
+                  "Jul 2019",
+                  "Aug 2019",
+                  "Sep 2019",
+                  "Oct 2019",
+                  "Nov 2019",
+                  "Dec 2019",
+                  "Total"]
+    df = df.set_index("Item")
     return df
